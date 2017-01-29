@@ -1,4 +1,4 @@
-import * from '../constants/session'
+import * as actions from '../constants/session'
 
 const initialState = {
   isFetching: false,
@@ -10,9 +10,9 @@ const initialState = {
 
 const session = (state = initialState, action) => {
   switch (action.type) {
-  case LOGIN:
+  case actions.LOGIN:
     return login(state, action)
-  case LOGOUT:
+  case actions.LOGOUT:
     return logout()
   default:
     return state
@@ -24,7 +24,9 @@ const login = (state, action) => {
   case 'success':
     return {
       ...initialState,
-      isAuthenticated: true
+      isAuthenticated: true,
+      email: action.email,
+      name: action.name
     }
   case 'failure':
     return {
