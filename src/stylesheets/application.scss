@@ -1,0 +1,11 @@
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+#news_panel .panel-heading{
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.news-post .post-author {
+  font-style: italic;
+}
