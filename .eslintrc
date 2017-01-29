@@ -1,0 +1,48 @@
+---
+extends: eslint:recommended
+
+ecmaFeatures:
+  jsx: true
+  modules: true
+
+env:
+  browser: true
+  node: true
+
+parser: babel-eslint
+
+rules:
+  indent: [2, 2] # 2 spaces indentation
+  max-len: [2, 120, 4]
+  quotes: [2, "single"]
+  semi: [2, "never"]
+  no-multiple-empty-lines: [2, {"max": 1}]
+
+  brace-style: [2, "stroustrup"]
+  comma-dangle: ["error", "never"]
+  comma-style: [2, "last"]
+  computed-property-spacing: [2, "never"]
+  dot-location: [2, "property"]
+
+  one-var: [2, "never"]
+  #no-var: [2]
+  prefer-const: [2]
+  no-bitwise: [2]
+
+  object-curly-spacing: [2, "always"]
+  array-bracket-spacing: [2, "never"]
+  space-unary-ops: [2, {"words": true, "nonwords": false}]
+  keyword-spacing: [2, {"after": true}]
+  space-before-blocks: [2, "always"]
+  space-before-function-paren: [2, "never"]
+  space-in-parens: [2, "never"]
+  spaced-comment: [2, "always"]
+
+  no-console: 0
+
+  react/jsx-uses-react: 2
+  react/jsx-uses-vars: 2
+  react/react-in-jsx-scope: 2
+
+plugins:
+  - react
