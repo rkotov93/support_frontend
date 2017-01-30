@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 
 import { i18nReducer } from 'react-redux-i18n'
-import session from './session'
+import sessions from './sessions'
 
 const rootReducer = combineReducers({
-  session,
+  sessions,
   i18n: i18nReducer
 })
 

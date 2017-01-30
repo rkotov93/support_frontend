@@ -1,13 +1,21 @@
 import '../../stylesheets/application.scss'
 
 import React from 'react'
+import { Grid, Row, Col } from 'react-bootstrap'
+
 import Navigation from './Navigation'
 
 const App = ({ main }) => {
   return (
-    <div id="application§">
+    <div id="application">
       <Navigation />
-      {main}
+      <Grid fluid={true}>
+        <Row>
+          <Col md={12}>
+            {main}
+          </Col>
+        </Row>
+      </Grid>
     </div>
   )
 }
