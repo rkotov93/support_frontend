@@ -14,13 +14,19 @@ const LoginPage = ({ email, isFetching, errorMessage, onEmailChange, onFormSubmi
         <Row>
           <Col mdOffset={3} md={6}>
             <Panel header={header}>
-              <form>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  onFormSubmit(emailInput.value, passwordInput.value)
+                }}
+              >
                 {errorHandler(errorMessage)}
                 <FormGroup>
                   <FormControl
                     inputRef={node => emailInput = node}
                     type="text"
                     placeholder={I18n.t('users.email')}
+                    name="user[email]"
                     onChange={() => onEmailChange(emailInput.value)}
                     defaultValue={email}
                     disabled={isFetching}
@@ -31,15 +37,14 @@ const LoginPage = ({ email, isFetching, errorMessage, onEmailChange, onFormSubmi
                     inputRef={node => passwordInput = node}
                     type="password"
                     placeholder={I18n.t('users.password')}
+                    name="user[password]"
                     disabled={isFetching}
                   />
                 </FormGroup>
                 <Button
+                  type="submit"
                   bsStyle='primary'
                   style={{ width: '100%' }}
-                  onClick={() => {
-                    onFormSubmit(emailInput.value, passwordInput.value)
-                  }}
                   disabled={isFetching}
                 >
                   <Translate value="sessions.login" />
