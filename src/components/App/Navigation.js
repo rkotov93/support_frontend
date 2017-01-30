@@ -1,12 +1,13 @@
 import React from 'react'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { Translate } from 'react-redux-i18n'
 
 const Navigation = () => {
   return (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#">Crossover Support</a>
+          <a href="#"><Translate value="application.title" /></a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
