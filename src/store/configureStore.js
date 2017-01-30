@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import rootReducer from '../reducers'
-import translationsObject from '../constants/localization'
+import translationsObject from '../constants/locales'
 import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n'
 
 const configureStore = (preloadedState) => {
