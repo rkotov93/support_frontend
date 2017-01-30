@@ -8,9 +8,10 @@ import configureStore from './store/configureStore'
 import App from './components/App'
 import TicketsList from './components/Tickets/TicketsList'
 import LoginPage from './containers/LoginPage'
+import RegistrationPage from './components/Registrations/RegistrationPage'
 
 import { appInitialize } from './actions/AppActions'
-import { loginPageEnter } from './actions/SessionsActions'
+import { checkAuthentication } from './actions/SessionActions'
 
 const store = configureStore()
 
@@ -26,7 +27,12 @@ render(
       <Route
         path='/login'
         component={LoginPage}
-        onEnter={loginPageEnter()}
+        onEnter={checkAuthentication()}
+      />
+      <Route
+        path='/registration'
+        component={RegistrationPage}
+        onEnter={checkAuthentication()}
       />
     </Router>
   </Provider>,

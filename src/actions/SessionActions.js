@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router'
 import * as constants from '../constants/sessions'
 
-export const loginPageEnter = () => {
+export const checkAuthentication = () => {
   return (nextState, replace) => {
     if (localStorage.getItem(constants.AUTH))
       replace('/')

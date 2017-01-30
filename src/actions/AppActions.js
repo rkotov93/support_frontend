@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router'
 import { AUTH } from '../constants/sessions'
-import { loginSuccess } from '../actions/SessionsActions'
+import { loginSuccess } from '../actions/SessionActions'
 
 export const appInitialize = (dispatch) => {
   return () => {

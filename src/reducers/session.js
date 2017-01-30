@@ -9,7 +9,7 @@ const initialState = {
   errorMessage: null
 }
 
-const sessions = (state = initialState, action) => {
+const session = (state = initialState, action) => {
   switch (action.type) {
   case constants.LOGIN:
     return login(state, action)
@@ -50,4 +50,4 @@ const logout = () => {
   return initialState
 }
 
-export default sessions
+export default session

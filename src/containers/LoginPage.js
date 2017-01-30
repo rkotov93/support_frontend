@@ -1,12 +1,12 @@
-import { login, handleEmailInputChange } from '../actions/SessionsActions'
+import { login, handleEmailInputChange } from '../actions/SessionActions'
 import LoginPage from '../components/Sessions/LoginPage'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
   return {
-    email: state.sessions.email,
-    isFetching: state.sessions.isFetching,
-    errorMessage: state.sessions.errorMessage
+    email: state.session.email,
+    isFetching: state.session.isFetching,
+    errorMessage: state.session.errorMessage
   }
 }
 
