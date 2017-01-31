@@ -48,3 +48,23 @@ export const fetchTickets = (page = 1) => {
     }).catch(() => dispatch(fetchTicketsFailure([I18n.t('errors.something')])))
   }
 }
+
+export const destroyTicket = (id) => {
+  return (dispatch) => {
+    dispatch(fetchTicketsRequest())
+    return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}.json`, {
+      method: 'DELETE',
+      headers: headers()
+    }).then(response => {
+      return response.json().then(json => {
+        return { json, response }
+      })
+    }).then(({ json, response }) => {
+      if (response.ok) {
+        dispatch(fetchTicketsSuccess(json))
+      }
+      else
+        dispatch(fetchTicketsFailure(json))
+    }).catch(() => dispatch(fetchTicketsFailure([I18n.t('errors.something')])))
+  }
+}

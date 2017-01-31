@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import TicketsList from '../components/Tickets/TicketsList'
+import { destroyTicket } from '../actions/TicketsActions'
 
 const mapStateToProps = (state) => {
   return {
@@ -7,7 +8,15 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDestroy: (id) => {
+      dispatch(destroyTicket(id))
+    }
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(TicketsList)
