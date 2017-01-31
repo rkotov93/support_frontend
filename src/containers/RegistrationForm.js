@@ -22,7 +22,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmit: (user) => {
-      console.log(user)
       dispatch(register(user))
     }
   }

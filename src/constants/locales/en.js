@@ -15,7 +15,11 @@ const en = {
     password_confirmation: 'Password confirmation'
   },
   tickets: {
-    title: 'Tickets'
+    title: 'Tickets',
+    noItems: 'No tickets'
+  },
+  errors: {
+    something: 'Something went wrong'
   }
 }
 

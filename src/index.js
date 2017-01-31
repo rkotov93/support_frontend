@@ -13,6 +13,7 @@ import RegistrationPage from './components/Registrations/RegistrationPage'
 
 import { appInitialize } from './actions/AppActions'
 import { checkAuthentication } from './actions/SessionActions'
+import { ticketsListEnter } from './actions/TicketsActions'
 
 const store = configureStore()
 
@@ -23,6 +24,7 @@ render(
         <Route
           path='/'
           components={{ main: TicketsList }}
+          onEnter={ticketsListEnter(store.dispatch)}
         />
       </Route>
       <Route

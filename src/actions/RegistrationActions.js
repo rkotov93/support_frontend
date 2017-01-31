@@ -2,6 +2,7 @@ import { browserHistory } from 'react-router'
 import * as constants from '../constants/registrations'
 import { AUTH } from '../constants/sessions'
 import { loginSuccess } from './SessionActions'
+import { I18n } from 'react-redux-i18n'
 
 const registrationRequest = () => {
   return {
@@ -10,7 +11,6 @@ const registrationRequest = () => {
 }
 
 const registrationSuccess = () => {
-  console.log(localStorage.getItem(constants.AUTH))
   return {
     type: constants.REGISTER,
     status: 'success'
@@ -47,6 +47,6 @@ export const register = (user) => {
       }
       else
         dispatch(registrationFailure(json))
-    }).catch((e) => dispatch(registrationFailure([e.message])))
+    }).catch(() => dispatch(registrationFailure([I18n.t('errors.something')])))
   }
 }
