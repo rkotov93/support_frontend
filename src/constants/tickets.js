@@ -1,1 +1,2 @@
 export const FETCH_TICKETS = 'FETCH_TICKETS'
+export const FETCH_TICKET = 'FETCH_TICKET'

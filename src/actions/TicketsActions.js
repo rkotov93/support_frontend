@@ -53,6 +53,53 @@ export const fetchTickets = (page = 1) => {
   }
 }
 
+export const ticketPageEnter = (dispatch) => {
+  return (nextState) => {
+    fetchTicket(nextState.params.id)(dispatch)
+  }
+}
+
+const fetchTicketRequest = () => {
+  return {
+    type: constants.FETCH_TICKET
+  }
+}
+
+const fetchTicketSuccess = (ticket) => {
+  return {
+    type: constants.FETCH_TICKET,
+    status: 'success',
+    ticket
+  }
+}
+
+const fetchTicketFailure = (errorMessages) => {
+  return {
+    type: constants.FETCH_TICKET,
+    status: 'failure',
+    errorMessages
+  }
+}
+
+export const fetchTicket = (id) => {
+  return (dispatch) => {
+    dispatch(fetchTicketRequest())
+    return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}.json`, {
+      headers: headers()
+    }).then(response => {
+      return response.json().then(json => {
+        return { json, response }
+      })
+    }).then(({ json, response }) => {
+      if (response.ok) {
+        dispatch(fetchTicketSuccess(json.ticket))
+      }
+      else
+        dispatch(fetchTicketFailure(json))
+    }).catch(() => dispatch(fetchTicketFailure([I18n.t('errors.something')])))
+  }
+}
+
 export const destroyTicket = (id, page = 1) => {
   return (dispatch) => {
     dispatch(fetchTicketsRequest())

@@ -5,7 +5,7 @@ const en = {
   noMatch: 'No match',
   sessions: {
     login: 'Login',
-    logout: 'Logout'
+    logout: 'Log out'
   },
   users: {
     title: 'Users',

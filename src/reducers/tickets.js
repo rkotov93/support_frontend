@@ -4,6 +4,7 @@ const initialState = {
   items: [],
   isFetching: false,
   errorMessages: null,
+  current: null,
   pagination: {
     page: 1,
     totalPages: 1,
@@ -15,6 +16,8 @@ const tickets = (state = initialState, action) => {
   switch (action.type) {
   case actions.FETCH_TICKETS:
     return fetchTickets(state, action)
+  case actions.FETCH_TICKET:
+    return fetchTicket(state, action)
   default:
     return state
   }
@@ -30,6 +33,28 @@ const fetchTickets = (state, action) => {
         totalPages: action.data.meta.total_pages,
         totalCount: action.data.meta.total_count
       },
+      isFetching: false
+    }
+  case 'failure':
+    return {
+      ...initialState,
+      isFetching: false,
+      errorMessages: action.errorMessages
+    }
+  default:
+    return {
+      ...state,
+      isFetching: true
+    }
+  }
+}
+
+const fetchTicket = (state, action) => {
+  switch (action.status) {
+  case 'success':
+    return {
+      ...state,
+      current: action.ticket,
       isFetching: false
     }
   case 'failure':

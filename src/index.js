@@ -8,36 +8,43 @@ import configureStore from './store/configureStore'
 import App from './containers/App'
 import NoMatch from './components/shared/NoMatch'
 import TicketsList from './containers/TicketsList'
+import TicketPage from './containers/TicketPage'
 import LoginPage from './containers/LoginPage'
 import RegistrationPage from './components/Registrations/RegistrationPage'
 
 import { appInitialize } from './actions/AppActions'
 import { checkAuthentication } from './actions/SessionActions'
 import { ticketsListEnter } from './actions/TicketsActions'
+import { ticketPageEnter } from './actions/TicketsActions'
 
 const store = configureStore()
 
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route component={App} onEnter={appInitialize(store.dispatch)}>
-        <Route
-          path='/'
-          components={{ main: TicketsList }}
-          onEnter={ticketsListEnter(store.dispatch)}
-        />
-      </Route>
       <Route
-        path='/login'
+        path="/login"
         component={LoginPage}
         onEnter={checkAuthentication()}
       />
       <Route
-        path='/registration'
+        path="/registration"
         component={RegistrationPage}
         onEnter={checkAuthentication()}
       />
-      <Route path='*' component={NoMatch}/>
+      <Route component={App} onEnter={appInitialize(store.dispatch)}>
+        <Route
+          path="/"
+          components={{ main: TicketsList }}
+          onEnter={ticketsListEnter(store.dispatch)}
+        />
+        <Route
+          path="/tickets/:id"
+          components={{ main: TicketPage }}
+          onEnter={ticketPageEnter(store.dispatch)}
+        />
+        <Route path="*" components={{ main: NoMatch }}/>
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('root')
