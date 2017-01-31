@@ -7,7 +7,7 @@ import configureStore from './store/configureStore'
 
 import App from './containers/App'
 import NoMatch from './components/shared/NoMatch'
-import TicketsList from './components/Tickets/TicketsList'
+import TicketsList from './containers/TicketsList'
 import LoginPage from './containers/LoginPage'
 import RegistrationPage from './components/Registrations/RegistrationPage'
 
@@ -24,7 +24,6 @@ render(
           path='/'
           components={{ main: TicketsList }}
         />
-        <Route path='*' components={{ main: NoMatch }}/>
       </Route>
       <Route
         path='/login'
@@ -36,6 +35,7 @@ render(
         component={RegistrationPage}
         onEnter={checkAuthentication()}
       />
+      <Route path='*' component={NoMatch}/>
     </Router>
   </Provider>,
   document.getElementById('root')

@@ -47,6 +47,6 @@ export const register = (user) => {
       }
       else
         dispatch(registrationFailure(json))
-    }).catch(() => dispatch(registrationFailure('Not registered')))
+    }).catch((e) => dispatch(registrationFailure([e.message])))
   }
 }
