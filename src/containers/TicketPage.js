@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
   return {
     ...state.tickets.current,
     page: state.tickets.pagination.page,
-    isFetching: state.tickets.isFetching
+    isFetching: state.tickets.isFetching,
+    role: state.session.role
   }
 }
 

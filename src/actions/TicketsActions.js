@@ -118,6 +118,48 @@ export const destroyTicket = (id, page = 1) => {
   }
 }
 
+export const createTicket = (ticket) => {
+  return (dispatch) => {
+    dispatch(fetchTicketsRequest())
+    return fetch(`${process.env.API_HOST}/api/v1/tickets.json`, {
+      method: 'POST',
+      headers: headers(),
+      body: JSON.stringify({ ticket: ticket })
+    }).then(response => {
+      return response.json().then(json => {
+        return { json, response }
+      })
+    }).then(({ json, response }) => {
+      if (response.ok) {
+        browserHistory.push({ pathname: `/tickets/${json.ticket.id}` })
+      }
+      else
+        dispatch(fetchTicketsFailure(json))
+    }).catch((e) => dispatch(fetchTicketsFailure([e.message])))
+  }
+}
+
+export const updateTicket = (id, data) => {
+  return (dispatch) => {
+    dispatch(fetchTicketsRequest())
+    return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}.json`, {
+      method: 'PUT',
+      headers: headers(),
+      body: JSON.stringify({ ticket: data })
+    }).then(response => {
+      return response.json().then(json => {
+        return { json, response }
+      })
+    }).then(({ json, response }) => {
+      if (response.ok) {
+        browserHistory.push({ pathname: `/tickets/${json.ticket.id}` })
+      }
+      else
+        dispatch(fetchTicketsFailure(json))
+    }).catch((e) => dispatch(fetchTicketsFailure([e.message])))
+  }
+}
+
 export const turnPage = (page) => {
   browserHistory.push({ pathname: '/', query: { page: page } })
   return fetchTickets(page)

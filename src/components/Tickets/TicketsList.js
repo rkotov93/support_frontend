@@ -1,18 +1,26 @@
 import React from 'react'
-import { Panel, Pagination } from 'react-bootstrap'
+import { Button, Panel, Pagination } from 'react-bootstrap'
 import { Translate } from 'react-redux-i18n'
+import { Link } from 'react-router'
 import TicketItem from './TicketItem'
 import ErrorMessages from '../shared/ErrorMessages'
 
-const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages }) => {
+const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, role }) => {
   const header = (
-    <h3><Translate value="tickets.title" /></h3>
+    <h3 style={{ fontSize: '35px', fontWeight: 'bold' }}>
+      <Translate value="tickets.title" />
+      <Link to="/tickets/new">
+        <Button bsStyle="primary" className="pull-right">
+          <Translate value="tickets.newTicket" />
+        </Button>
+      </Link>
+    </h3>
   )
 
   return (
-    <Panel header={header}>
+    <Panel id="tickets_panel" header={header}>
       <ErrorMessages messages={errorMessages} />
-      {renderedTicketsItems(tickets, onDestroy, pagination.page)}
+      {renderedTicketsItems(tickets, onDestroy, pagination.page, role)}
       {
         tickets.length > 0 &&
           <Pagination
@@ -31,7 +39,7 @@ const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages }
   )
 }
 
-const renderedTicketsItems = (tickets, onDestroy, page) => {
+const renderedTicketsItems = (tickets, onDestroy, page, role) => {
   if (tickets.length === 0)
     return (
       <div>
@@ -47,6 +55,7 @@ const renderedTicketsItems = (tickets, onDestroy, page) => {
               key={`ticket_${ticket.id}`}
               page={page}
               onDestroy={onDestroy}
+              role={role}
               {...ticket}
             />
           ))

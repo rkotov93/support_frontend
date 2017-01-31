@@ -9,6 +9,8 @@ import App from './containers/App'
 import NoMatch from './components/shared/NoMatch'
 import TicketsList from './containers/TicketsList'
 import TicketPage from './containers/TicketPage'
+import NewTicketPage from './containers/NewTicketPage'
+import EditTicketPage from './containers/EditTicketPage'
 import LoginPage from './containers/LoginPage'
 import RegistrationPage from './components/Registrations/RegistrationPage'
 
@@ -37,6 +39,15 @@ render(
           path="/"
           components={{ main: TicketsList }}
           onEnter={ticketsListEnter(store.dispatch)}
+        />
+        <Route
+          path="/tickets/new"
+          components={{ main: NewTicketPage }}
+        />
+        <Route
+          path="/tickets/:id/edit"
+          components={{ main: EditTicketPage }}
+          onEnter={ticketPageEnter(store.dispatch)}
         />
         <Route
           path="/tickets/:id"

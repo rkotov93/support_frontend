@@ -1,7 +1,15 @@
 import React from 'react'
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 
-const FieldFormControl = ({ input, type, disabled, placeholder, label, meta }) => {
+const FieldFormControl = ({
+  input,
+  type,
+  disabled,
+  placeholder,
+  componentClass,
+  label,
+  meta
+}) => {
   return (
     <FormGroup controlId={input.name} validationState={validationState(meta.visited, meta.invalid)}>
       {label && <ControlLabel>{label}</ControlLabel>}
@@ -12,6 +20,7 @@ const FieldFormControl = ({ input, type, disabled, placeholder, label, meta }) =
         onChange={input.onChange}
         onFocus={input.onFocus}
         disabled={disabled}
+        componentClass={componentClass}
       />
       <FormControl.Feedback />
     </FormGroup>

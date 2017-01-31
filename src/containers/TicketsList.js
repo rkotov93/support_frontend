@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
   return {
     tickets: state.tickets.items,
     pagination: state.tickets.pagination,
-    errorMessages: state.tickets.errorMessages
+    errorMessages: state.tickets.errorMessages,
+    role: state.session.role
   }
 }
 
