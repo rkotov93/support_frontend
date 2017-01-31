@@ -56,7 +56,7 @@ export const login = (creds) => {
 }
 
 export const logout = () => {
-  localStorage.removeItem('jwt')
+  localStorage.removeItem(constants.AUTH)
   return {
     type: constants.LOGOUT
   }

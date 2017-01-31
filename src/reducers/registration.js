@@ -21,7 +21,7 @@ const register = (state, action) => {
   case 'failure':
     return {
       ...initialState,
-      errorMessage: action.errorMessage
+      errorMessages: action.errorMessages
     }
   default:
     return {
