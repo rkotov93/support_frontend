@@ -5,7 +5,8 @@ import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
 import configureStore from './store/configureStore'
 
-import App from './components/App'
+import App from './containers/App'
+import NoMatch from './components/shared/NoMatch'
 import TicketsList from './components/Tickets/TicketsList'
 import LoginPage from './containers/LoginPage'
 import RegistrationPage from './components/Registrations/RegistrationPage'
@@ -23,6 +24,7 @@ render(
           path='/'
           components={{ main: TicketsList }}
         />
+        <Route path='*' components={{ main: NoMatch }}/>
       </Route>
       <Route
         path='/login'

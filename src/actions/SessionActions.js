@@ -57,6 +57,7 @@ export const login = (creds) => {
 
 export const logout = () => {
   localStorage.removeItem(constants.AUTH)
+  browserHistory.push('/login')
   return {
     type: constants.LOGOUT
   }

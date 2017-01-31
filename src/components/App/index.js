@@ -5,13 +5,17 @@ import { Grid, Row, Col } from 'react-bootstrap'
 
 import Navigation from './Navigation'
 
-const App = ({ main }) => {
+const App = ({ main, name, role, logout }) => {
   return (
     <div id="application">
-      <Navigation />
+      <Navigation
+        name={name}
+        role={role}
+        logout={logout}
+      />
       <Grid fluid={true}>
         <Row>
-          <Col md={12}>
+          <Col mdOffset={2} md={8}>
             {main}
           </Col>
         </Row>
