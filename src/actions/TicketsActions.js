@@ -1,6 +1,7 @@
 import * as constants from '../constants/tickets'
 import headers from './headers'
 import { I18n } from 'react-redux-i18n'
+import { browserHistory } from 'react-router'
 
 export const ticketsListEnter = (dispatch) => {
   return (nextState) => {
@@ -41,7 +42,10 @@ export const fetchTickets = (page = 1) => {
       })
     }).then(({ json, response }) => {
       if (response.ok) {
-        dispatch(fetchTicketsSuccess(json))
+        if (json.tickets.length === 0 && page !== 1)
+          dispatch(turnPage(1))
+        else
+          dispatch(fetchTicketsSuccess(json))
       }
       else
         dispatch(fetchTicketsFailure(json))
@@ -49,22 +53,25 @@ export const fetchTickets = (page = 1) => {
   }
 }
 
-export const destroyTicket = (id) => {
+export const destroyTicket = (id, page = 1) => {
   return (dispatch) => {
     dispatch(fetchTicketsRequest())
     return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}.json`, {
       method: 'DELETE',
       headers: headers()
     }).then(response => {
-      return response.json().then(json => {
-        return { json, response }
-      })
-    }).then(({ json, response }) => {
+      return response
+    }).then((response) => {
       if (response.ok) {
-        dispatch(fetchTicketsSuccess(json))
+        dispatch(turnPage(page))
       }
       else
-        dispatch(fetchTicketsFailure(json))
-    }).catch(() => dispatch(fetchTicketsFailure([I18n.t('errors.something')])))
+        dispatch(fetchTicketsFailure(I18n.t('errors.something')))
+    }).catch((e) => dispatch(fetchTicketsFailure([e.message])))
   }
+}
+
+export const turnPage = (page) => {
+  browserHistory.push({ pathname: '/', query: { page: page } })
+  return fetchTickets(page)
 }

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-const TicketItem = ({ id, title, description, author, onDestroy }) => {
+const TicketItem = ({ id, title, description, author, onDestroy, page }) => {
   return (
     <div>
       <Button
         className='close'
         onClick={() => {
-          onDestroy(id)
+          onDestroy(id, page)
         }}
       >
         <span aria-hidden='true'>&times;</span>

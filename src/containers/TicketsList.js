@@ -1,17 +1,22 @@
 import { connect } from 'react-redux'
 import TicketsList from '../components/Tickets/TicketsList'
-import { destroyTicket } from '../actions/TicketsActions'
+import { destroyTicket, turnPage } from '../actions/TicketsActions'
 
 const mapStateToProps = (state) => {
   return {
-    tickets: state.tickets.items
+    tickets: state.tickets.items,
+    pagination: state.tickets.pagination,
+    errorMessages: state.tickets.errorMessages
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDestroy: (id) => {
-      dispatch(destroyTicket(id))
+    onDestroy: (id, page) => {
+      dispatch(destroyTicket(id, page))
+    },
+    turnPage: (page) => {
+      dispatch(turnPage(page))
     }
   }
 }
