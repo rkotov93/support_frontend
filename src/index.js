@@ -21,7 +21,7 @@ import UsersList from './containers/UsersList'
 import { appInitialize } from './actions/AppActions'
 import { checkAuthentication } from './actions/SessionActions'
 
-import { ticketsListEnter, ticketPageEnter, ticketsListChange } from './actions/TicketsActions'
+import { ticketsListEnter, ticketPageEnter, ticketsListChange, editTicketPageEnter } from './actions/TicketsActions'
 import { usersListEnter, usersListChange } from './actions/UsersActions'
 
 const store = configureStore()
@@ -54,7 +54,7 @@ render(
         <Route
           path="/tickets/:id/edit"
           components={{ main: EditTicketPage }}
-          onEnter={ticketPageEnter(store.dispatch)}
+          onEnter={editTicketPageEnter(store.dispatch)}
         />
         <Route
           path="/tickets/:id"

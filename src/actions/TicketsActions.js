@@ -65,6 +65,12 @@ export const ticketPageEnter = (dispatch) => {
   }
 }
 
+export const editTicketPageEnter = (dispatch) => {
+  return (nextState) => {
+    fetchTicket(nextState.params.id, { edit: true })(dispatch)
+  }
+}
+
 const fetchTicketRequest = () => {
   return {
     type: constants.FETCH_TICKET
@@ -87,7 +93,7 @@ const fetchTicketFailure = (errorMessages) => {
   }
 }
 
-export const fetchTicket = (id) => {
+export const fetchTicket = (id, options = {}) => {
   return (dispatch) => {
     dispatch(fetchTicketRequest())
     return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}.json`, {
@@ -98,6 +104,8 @@ export const fetchTicket = (id) => {
       })
     }).then(({ json, response }) => {
       if (response.ok) {
+        if (options.edit && json.ticket.status == constants.SOLVED)
+          browserHistory.push(`/tickets/${json.ticket.id}`)
         dispatch(fetchTicketSuccess(json.ticket))
       }
       else

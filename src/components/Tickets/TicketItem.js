@@ -26,7 +26,7 @@ const TicketItem = ({ id, title, description, author, status, onDestroy, page, r
       {(role === roles.SUPPORT || role === roles.ADMIN) && renderEventButtons(status, start, resolve)}
 
       {
-        (role === roles.CUSTOMER || role === roles.ADMIN) &&
+        (role === roles.CUSTOMER || role === roles.ADMIN) && status !== 'solved' &&
           <Link to={`/tickets/${id}/edit`}>
             <Button bsStyle="primary">
               <Translate value="tickets.edit" />
