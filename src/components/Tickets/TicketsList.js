@@ -5,10 +5,27 @@ import { Link } from 'react-router'
 import TicketItem from './TicketItem'
 import ErrorMessages from '../shared/ErrorMessages'
 
-const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, role, start, resolve }) => {
+const TicketsList = ({ tickets,
+  pagination,
+  turnPage,
+  onDestroy,
+  errorMessages,
+  role,
+  start,
+  resolve,
+  filter,
+  changeFilter
+}) => {
   const header = (
     <h3 style={{ fontSize: '35px', fontWeight: 'bold' }}>
-      <Translate value="tickets.title" />
+      <Translate value="tickets.title" />&nbsp;
+      <Button
+        onClick={() => {
+          changeFilter(filter)
+        }}
+      >
+        <Translate value={`tickets.filters.${filter}`} />&nbsp;
+      </Button>
       <Link to="/tickets/new">
         <Button bsStyle="primary" className="pull-right">
           <Translate value="tickets.newTicket" />
@@ -20,7 +37,7 @@ const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, 
   return (
     <Panel id="tickets_panel" header={header}>
       <ErrorMessages messages={errorMessages} />
-      {renderedTicketsItems(tickets, onDestroy, pagination.page, role, start, resolve)}
+      {renderedTicketsItems(tickets, onDestroy, pagination.page, role, start, resolve, filter)}
       {
         tickets.length > 0 &&
           <Pagination
@@ -39,7 +56,7 @@ const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, 
   )
 }
 
-const renderedTicketsItems = (tickets, onDestroy, page, role, start, resolve) => {
+const renderedTicketsItems = (tickets, onDestroy, page, role, start, resolve, filter) => {
   if (tickets.length === 0)
     return (
       <div>
@@ -54,6 +71,7 @@ const renderedTicketsItems = (tickets, onDestroy, page, role, start, resolve) =>
             <TicketItem
               key={`ticket_${ticket.id}`}
               page={page}
+              filter={filter}
               onDestroy={onDestroy}
               role={role}
               start={() => {

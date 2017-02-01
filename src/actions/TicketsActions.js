@@ -5,13 +5,13 @@ import { browserHistory } from 'react-router'
 
 export const ticketsListEnter = (dispatch) => {
   return (nextState) => {
-    fetchTickets(nextState.location.query.page)(dispatch)
+    fetchTickets(nextState.location.query.filter, nextState.location.query.page)(dispatch)
   }
 }
 
 export const ticketsListChange = (dispatch) => {
   return (prevState, nextState) => {
-    fetchTickets(nextState.location.query.page)(dispatch)
+    fetchTickets(nextState.location.query.filter, nextState.location.query.page)(dispatch)
   }
 }
 
@@ -37,10 +37,11 @@ const fetchTicketsFailure = (errorMessages) => {
   }
 }
 
-export const fetchTickets = (page = 1) => {
+export const fetchTickets = (filter, page = 1, query = {}) => {
+  const path = filter === constants.ALL || !filter ? '/api/v1/tickets.json' : `/api/v1/tickets/${filter}.json`
   return (dispatch) => {
     dispatch(fetchTicketsRequest())
-    return fetch(`${process.env.API_HOST}/api/v1/tickets.json?page=${page}`, {
+    return fetch(`${process.env.API_HOST}${path}?page=${page}`, {
       headers: headers()
     }).then(response => {
       return response.json().then(json => {
@@ -49,7 +50,7 @@ export const fetchTickets = (page = 1) => {
     }).then(({ json, response }) => {
       if (response.ok) {
         if (json.tickets.length === 0 && page !== 1)
-          dispatch(turnPage(1))
+          dispatch(turnPage(1, query))
         else
           dispatch(fetchTicketsSuccess(json))
       }
@@ -114,7 +115,7 @@ export const fetchTicket = (id, options = {}) => {
   }
 }
 
-export const destroyTicket = (id, page = 1) => {
+export const destroyTicket = (id, page = 1, query = {}) => {
   return (dispatch) => {
     dispatch(fetchTicketsRequest())
     return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}.json`, {
@@ -124,7 +125,7 @@ export const destroyTicket = (id, page = 1) => {
       return response
     }).then((response) => {
       if (response.ok) {
-        dispatch(turnPage(page))
+        dispatch(turnPage(page, query))
       }
       else
         dispatch(fetchTicketsFailure(I18n.t('errors.something')))
@@ -202,7 +203,17 @@ export const changeTicketStatus = (id, event) => {
   }
 }
 
-export const turnPage = (page) => {
-  browserHistory.push({ pathname: '/', query: { page: page } })
-  return fetchTickets(page)
+export const filterTickets = (currentFilter) => {
+  const filter = currentFilter === constants.ALL || !currentFilter ? constants.ACTIVE : constants.ALL
+  browserHistory.push({ pathname: '/', query: { filter: filter } })
+  return fetchTickets(filter, 1)
+}
+
+export const turnPage = (page, query) => {
+  const newQuery = {
+    ...query,
+    page: page
+  }
+  browserHistory.push({ pathname: '/', query: newQuery })
+  return fetchTickets(newQuery.filter, page)
 }

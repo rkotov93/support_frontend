@@ -5,13 +5,13 @@ import { Translate } from 'react-redux-i18n'
 import * as roles from '../../constants/roles'
 import * as statuses from '../../constants/tickets'
 
-const TicketItem = ({ id, title, description, author, status, onDestroy, page, role, start, resolve }) => {
+const TicketItem = ({ id, title, description, author, status, onDestroy, page, role, start, resolve, filter }) => {
   return (
     <div>
       <Button
         className='close'
         onClick={() => {
-          onDestroy(id, page)
+          onDestroy(id, page, { filter: filter })
         }}
       >
         <span aria-hidden='true'>&times;</span>

@@ -29,13 +29,15 @@ const fetchTickets = (state, action) => {
   switch (action.status) {
   case 'success':
     return {
+      ...state,
       items: action.data.tickets,
       pagination: {
         page: action.data.meta.current_page,
         totalPages: action.data.meta.total_pages,
         totalCount: action.data.meta.total_count
       },
-      isFetching: false
+      isFetching: false,
+      errorMessages: null
     }
   case 'failure':
     return {

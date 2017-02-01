@@ -28,7 +28,7 @@ const Navigation = ({ name, role, logout }) => {
       </Nav>
 
       <Nav pullRight>
-        <NavDropdown title={name} id="current_user_dropdown">
+        <NavDropdown title={name || ''} id="current_user_dropdown">
           <MenuItem
             onClick={() => {
               logout()
