@@ -9,6 +9,12 @@ export const ticketsListEnter = (dispatch) => {
   }
 }
 
+export const ticketsListChange = (dispatch) => {
+  return (prevState, nextState) => {
+    fetchTickets(nextState.location.query.page)(dispatch)
+  }
+}
+
 const fetchTicketsRequest = () => {
   return {
     type: constants.FETCH_TICKETS

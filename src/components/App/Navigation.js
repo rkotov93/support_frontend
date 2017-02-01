@@ -5,28 +5,18 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Translate } from 'react-redux-i18n'
 import * as roles from '../../constants/roles'
 
-const Navigation = ({ name, role, logout, refresh }) => {
+const Navigation = ({ name, role, logout }) => {
   return (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link
-            to="/"
-            onClick={() => {
-              refresh()
-            }}
-          >
+          <Link to="/">
             <Translate value="application.title" />
           </Link>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
-        <LinkContainer
-          to="/"
-          onClick={() => {
-            refresh()
-          }}
-        >
+        <LinkContainer to="/">
           <NavItem><Translate value="tickets.title" /></NavItem>
         </LinkContainer>
         {
