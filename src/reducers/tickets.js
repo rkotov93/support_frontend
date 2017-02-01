@@ -18,6 +18,8 @@ const tickets = (state = initialState, action) => {
     return fetchTickets(state, action)
   case actions.FETCH_TICKET:
     return fetchTicket(state, action)
+  case actions.CHANGE_TICKET_STATUS:
+    return changeTicketStatus(state, action)
   default:
     return state
   }
@@ -68,6 +70,26 @@ const fetchTicket = (state, action) => {
       ...state,
       isFetching: true
     }
+  }
+}
+
+const changeTicketStatus = (state, action) => {
+  const items = state.items.map(ticket => {
+    if (ticket.id === action.ticket.id)
+      return action.ticket
+    else
+      return ticket
+  })
+
+  let current = null
+  if (state.current)
+    current = action.ticket
+
+  return {
+    ...state,
+    isFetching: false,
+    items,
+    current
   }
 }
 

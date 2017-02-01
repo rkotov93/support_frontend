@@ -160,6 +160,34 @@ export const updateTicket = (id, data) => {
   }
 }
 
+const changeTicketStatusSuccess = (ticket) => {
+  return {
+    type: constants.CHANGE_TICKET_STATUS,
+    ticket
+  }
+}
+
+export const changeTicketStatus = (id, event) => {
+  return (dispatch) => {
+    dispatch(fetchTicketsRequest())
+    return fetch(`${process.env.API_HOST}/api/v1/tickets/${id}/change_status.json`, {
+      method: 'POST',
+      headers: headers(),
+      body: JSON.stringify({ event: event })
+    }).then(response => {
+      return response.json().then(json => {
+        return { json, response }
+      })
+    }).then(({ json, response }) => {
+      if (response.ok) {
+        dispatch(changeTicketStatusSuccess(json.ticket))
+      }
+      else
+        dispatch(fetchTicketsFailure(json))
+    }).catch((e) => dispatch(fetchTicketsFailure([e.message])))
+  }
+}
+
 export const turnPage = (page) => {
   browserHistory.push({ pathname: '/', query: { page: page } })
   return fetchTickets(page)

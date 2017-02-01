@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import TicketsList from '../components/Tickets/TicketsList'
-import { destroyTicket, turnPage } from '../actions/TicketsActions'
+import { destroyTicket, turnPage, changeTicketStatus } from '../actions/TicketsActions'
 
 const mapStateToProps = (state) => {
   return {
@@ -18,6 +18,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     turnPage: (page) => {
       dispatch(turnPage(page))
+    },
+    start: (id) => {
+      dispatch(changeTicketStatus(id, 'start'))
+    },
+    resolve: (id) => {
+      dispatch(changeTicketStatus(id, 'resolve'))
     }
   }
 }

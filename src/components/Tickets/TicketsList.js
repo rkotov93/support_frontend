@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import TicketItem from './TicketItem'
 import ErrorMessages from '../shared/ErrorMessages'
 
-const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, role }) => {
+const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, role, start, resolve }) => {
   const header = (
     <h3 style={{ fontSize: '35px', fontWeight: 'bold' }}>
       <Translate value="tickets.title" />
@@ -20,7 +20,7 @@ const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, 
   return (
     <Panel id="tickets_panel" header={header}>
       <ErrorMessages messages={errorMessages} />
-      {renderedTicketsItems(tickets, onDestroy, pagination.page, role)}
+      {renderedTicketsItems(tickets, onDestroy, pagination.page, role, start, resolve)}
       {
         tickets.length > 0 &&
           <Pagination
@@ -39,7 +39,7 @@ const TicketsList = ({ tickets, pagination, turnPage, onDestroy, errorMessages, 
   )
 }
 
-const renderedTicketsItems = (tickets, onDestroy, page, role) => {
+const renderedTicketsItems = (tickets, onDestroy, page, role, start, resolve) => {
   if (tickets.length === 0)
     return (
       <div>
@@ -56,6 +56,12 @@ const renderedTicketsItems = (tickets, onDestroy, page, role) => {
               page={page}
               onDestroy={onDestroy}
               role={role}
+              start={() => {
+                start(ticket.id)
+              }}
+              resolve={() => {
+                resolve(ticket.id)
+              }}
               {...ticket}
             />
           ))
