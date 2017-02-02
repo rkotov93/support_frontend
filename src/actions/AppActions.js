@@ -21,9 +21,14 @@ export const appInitialize = (dispatch) => {
           dispatch(loginSuccess(json.user))
           dispatch(getInfo())
         }
-        else
+        else {
+          localStorage.removeItem(AUTH)
           browserHistory.push('/login')
-      }).catch(() => browserHistory.push('/login'))
+        }
+      }).catch(() => {
+        localStorage.removeItem(AUTH)
+        browserHistory.push('/login')
+      })
     else
       browserHistory.push('/login')
   }

@@ -52,7 +52,7 @@ export const fetchUsers = (page = 1) => {
       })
     }).then(({ json, response }) => {
       if (response.ok) {
-        if (json.users.length === 0 && page !== 1)
+        if (json.users.length === 0 && page.toString() !== '1')
           dispatch(turnPage(1))
         else
           dispatch(fetchUsersSuccess(json))

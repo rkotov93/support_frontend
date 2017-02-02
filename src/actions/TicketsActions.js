@@ -49,7 +49,7 @@ export const fetchTickets = (filter, page = 1, query = {}) => {
       })
     }).then(({ json, response }) => {
       if (response.ok) {
-        if (json.tickets.length === 0 && page !== 1)
+        if (json.tickets.length === 0 && page.toString() !== '1')
           dispatch(turnPage(1, query))
         else
           dispatch(fetchTicketsSuccess(json))
