@@ -3,6 +3,7 @@ import { AUTH } from '../constants/sessions'
 import * as constants from '../constants/sessions'
 import { loginSuccess } from '../actions/SessionActions'
 import headers from './headers'
+import { getInfo } from './PdfReportActions'
 
 export const appInitialize = (dispatch) => {
   return () => {
@@ -18,6 +19,7 @@ export const appInitialize = (dispatch) => {
         if (response.ok) {
           localStorage.setItem(constants.AUTH, JSON.stringify(json.user))
           dispatch(loginSuccess(json.user))
+          dispatch(getInfo())
         }
         else
           browserHistory.push('/login')

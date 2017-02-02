@@ -1,0 +1,1 @@
+export const FETCH_PDF_REPORT = 'FETCH_PDF_REPORT'

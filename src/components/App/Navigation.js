@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Translate } from 'react-redux-i18n'
 import * as roles from '../../constants/roles'
 
-const Navigation = ({ name, role, logout }) => {
+const Navigation = ({ name, role, logout, report, generateReport }) => {
   return (
     <Navbar>
       <Navbar.Header>
@@ -29,6 +29,24 @@ const Navigation = ({ name, role, logout }) => {
 
       <Nav pullRight>
         <NavDropdown title={name || ''} id="current_user_dropdown">
+          {
+            (role == roles.SUPPORT || role == roles.ADMIN) &&
+              <MenuItem
+                onClick={() => {
+                  generateReport()
+                }}
+              >
+                <Translate value="pdfReports.generate" />
+              </MenuItem>
+          }
+
+          {
+            report && (role == roles.SUPPORT || role == roles.ADMIN) &&
+              <MenuItem href={report} target="_blank">
+                <Translate value="pdfReports.download" />
+              </MenuItem>
+          }
+
           <MenuItem
             onClick={() => {
               logout()

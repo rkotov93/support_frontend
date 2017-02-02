@@ -18,6 +18,9 @@ const en = {
     title: 'Tickets',
     noItems: 'No tickets'
   },
+  pdfReports: {
+    generate: 'Generate report'
+  },
   errors: {
     something: 'Something went wrong'
   }
