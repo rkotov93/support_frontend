@@ -7,7 +7,7 @@ import * as statuses from '../../constants/tickets'
 
 const TicketItem = ({ id, title, description, author, status, onDestroy, page, role, start, resolve, filter }) => {
   return (
-    <div>
+    <div className="ticket-item">
       <Button
         className='close'
         onClick={() => {
@@ -16,11 +16,11 @@ const TicketItem = ({ id, title, description, author, status, onDestroy, page, r
       >
         <span aria-hidden='true'>&times;</span>
       </Button>
-      <h3>
+      <h3 className="title">
         <Link to={`/tickets/${id}`}>{title}</Link>&nbsp;
-        <i style={{ fontSize: '17px' }}><Translate value={`tickets.statuses.${status}`} /></i>
+        <i className="status" style={{ fontSize: '17px' }}><Translate value={`tickets.statuses.${status}`} /></i>
       </h3>
-      <p>{description}</p>
+      <p className="description">{description}</p>
       <p>{`${author.name}`} <i>{`<${author.email}>`}</i></p>
 
       {(role === roles.SUPPORT || role === roles.ADMIN) && renderEventButtons(status, start, resolve)}

@@ -1,15 +1,17 @@
 import * as constants from '../constants/users'
 import * as roles from '../constants/roles'
+import { AUTH } from '../constants/sessions'
 import headers from './headers'
 import { browserHistory } from 'react-router'
 import { I18n } from 'react-redux-i18n'
 
-export const usersListEnter = (dispatch, store) => {
+export const usersListEnter = (dispatch) => {
   return (nextState) => {
-    if (store.getState().session.role === roles.ADMIN)
+    const auth = localStorage.getItem(AUTH)
+    if (auth && JSON.parse(auth).role == roles.ADMIN)
       fetchUsers(nextState.location.query.page)(dispatch)
     else
-    browserHistory.push('/')
+      browserHistory.push('/')
   }
 }
 

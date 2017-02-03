@@ -23,10 +23,10 @@ const UsersList = ({ users, errorMessages, pagination, turnPage, changeRole, onD
           {
             users.map(user => {
               return (
-                <tr key={`user_${user.id}`}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                <tr className="user-item" key={`user_${user.id}`}>
+                  <td className="id">{user.id}</td>
+                  <td className="name">{user.name}</td>
+                  <td className="email">{user.email}</td>
                   <td>{roleSelector(user, changeRole)}</td>
                   <td>
                     <Button

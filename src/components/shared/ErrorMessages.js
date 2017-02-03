@@ -3,7 +3,7 @@ import React from 'react'
 const ErrorMessages = ({ messages }) => {
   if (messages && messages.length !== 0)
     return (
-      <ul>
+      <ul className="errors-list">
         {
           messages.map((message, index) => {
             return (<li style={{ color: 'red' }} key={`error_${index}`}>{message}</li>)
