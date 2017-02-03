@@ -12,7 +12,7 @@
   "license": "MIT",
   "jest": {
     "setupFiles": [
-      "./src/test/jest.setup.js"
+      "./spec/jest.setup.js"
     ]
   },
   "devDependencies": {
