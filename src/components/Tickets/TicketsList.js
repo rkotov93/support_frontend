@@ -5,7 +5,8 @@ import { Link } from 'react-router'
 import TicketItem from './TicketItem'
 import ErrorMessages from '../shared/ErrorMessages'
 
-const TicketsList = ({ tickets,
+const TicketsList = ({
+  tickets,
   pagination,
   turnPage,
   onDestroy,
@@ -54,6 +55,19 @@ const TicketsList = ({ tickets,
       }
     </Panel>
   )
+}
+
+TicketsList.propTypes = {
+  tickets: React.PropTypes.array.isRequired,
+  pagination: React.PropTypes.object,
+  turnPage: React.PropTypes.func,
+  onDestroy: React.PropTypes.func,
+  errorMessages: React.PropTypes.array,
+  role: React.PropTypes.string,
+  start: React.PropTypes.func,
+  resolve: React.PropTypes.func,
+  filter: React.PropTypes.string,
+  changeFilter: React.PropTypes.func
 }
 
 const renderedTicketsItems = (tickets, onDestroy, page, role, start, resolve, filter) => {
