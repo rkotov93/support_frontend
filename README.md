@@ -1,3 +1,7 @@
+SUPPORT FRONTEND
+--
+Testing React + Redux SPA application.
+
 REQUIREMENTS
 --
 * npm 3.10.3
@@ -5,5 +9,6 @@ REQUIREMENTS
 
 BOOTSTRAPPING
 --
+* Run [SUPPORT BACKEND](https://github.com/rkotov93/support_backend) rails API server
 * npm install
 * npm start
